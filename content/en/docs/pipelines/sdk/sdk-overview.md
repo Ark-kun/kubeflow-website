@@ -27,13 +27,15 @@ The Kubeflow Pipelines SDK includes the following packages:
     static configuration (in YAML format) that the Kubeflow Pipelines service
     can process. The Kubeflow Pipelines service converts the static 
     configuration into a set of Kubernetes resources for execution.
+  
+  Deprecated `kfp.compiler` features:
 
-  * `kfp.compiler.build_docker_image` builds a container image based on a 
+  * `kfp.compiler.build_docker_image` *Deprecated*. Builds a container image based on a 
     Dockerfile and pushes the image to a URI. In the parameters, you provide the 
     path to a Dockerfile containing the image specification, and the URI for the 
     target image (for example, a container registry).
 
-  * `kfp.compiler.build_python_component` builds a container image for a
+  * `kfp.compiler.build_python_component`. *Deprecated*. Builds a container image for a
     pipeline component based on a Python function, and pushes the image to a 
     URI. In the parameters, you provide the Python function that does the work 
     of the pipeline component, a Docker image to use as a base image, 
@@ -75,9 +77,11 @@ The Kubeflow Pipelines SDK includes the following packages:
   * `kfp.dsl.PipelineParam` represents a pipeline parameter that you can pass
     from one pipeline component to another. See the guide to 
     [pipeline parameters](/docs/pipelines/sdk/parameters/).
-  * `kfp.dsl.component` is a decorator for DSL functions that returns a
-    pipeline component.
-    ([`ContainerOp`](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.dsl.html#kfp.dsl.ContainerOp)).
+
+  Experimental `kfp.dsl` features that might be deprecated in the future:
+
+  * `kfp.dsl.component` is a decorator for functions that create [`ContainerOp`](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.dsl.html#kfp.dsl.ContainerOp) objects.
+    Helps specify the types of inputs and outputs.
   * `kfp.dsl.pipeline` is a decorator for Python functions that returns a
     pipeline.
   * `kfp.dsl.python_component` is a decorator for Python functions that adds
@@ -88,6 +92,9 @@ The Kubeflow Pipelines SDK includes the following packages:
     as domain-specific types like `GCPProjectID` and `GCRPath`.
     See the guide to 
     [DSL static type checking](/docs/pipelines/sdk/static-type-checking).
+  
+  Community `kfp.dsl` features:
+
   * [`kfp.dsl.ResourceOp`](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.dsl.html#kfp.dsl.ResourceOp)
     represents a pipeline task (op) which lets you directly manipulate 
     Kubernetes resources (`create`, `get`, `apply`, ...).
@@ -108,13 +115,12 @@ The Kubeflow Pipelines SDK includes the following packages:
   API](/docs/pipelines/reference/api/kubeflow-pipeline-api-spec/).
   Methods in this package include, but are not limited to, the following:
 
+  * `kfp.Client.create_run_from_pipeline_func` compiles a pipeline and submits it for execution.
+  * `kfp.Client.run_pipeline` runs a pipeline package or uploaded pipeline.
   * `kfp.Client.create_experiment` creates a pipeline 
     [experiment](/docs/pipelines/concepts/experiment/) and returns an
     experiment object.
-  * `kfp.Client.run_pipeline` runs a pipeline and returns a run object.
   * `kfp.Client.pipeline_uploads.upload_pipeline_version` uploads a local file to create a pipeline version. [Follow an example to learn more about creating a pipeline version](/docs/pipelines/tutorials/sdk-examples)
-
-* [`kfp.notebook`](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.notebook.html)
 
 * [KFP extension modules](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.extensions.html)
   include classes and functions for specific platforms on which you can use
